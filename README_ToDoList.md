@@ -15,6 +15,10 @@ It integrates **Google / Firebase authentication**, issues **stateless JWTs**, a
 - **Quality Gates** — Unit & integration testing (JUnit 5, Testcontainers), mutation testing (PIT), coverage (JaCoCo), static analysis (PMD).  
 - **DevOps-Ready** — `.env` environment configuration, containerized Postgres, SBOM (CycloneDX), reproducible Maven builds.
 
+
+If you’d like to learn more about the tests, proceed to the **Quality Assurance** page using the button below.
+[![Open QA Page](https://img.shields.io/badge/Quality%20Assurance-Open-blue?style=for-the-badge)](docs/quality_assurance.md)
+
 ---
 
 **Purpose:**  
