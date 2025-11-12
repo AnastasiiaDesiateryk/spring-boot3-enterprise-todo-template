@@ -10,8 +10,13 @@ FROM eclipse-temurin:21-jre
 ARG JAVA_OPTS=""
 WORKDIR /app
 COPY --from=builder /workspace/target/*.jar /app/app.jar
+
+# non-root user
 RUN addgroup --system app && adduser --system --ingroup app app || true && chown app:app /app/app.jar || true
 USER app
 EXPOSE 8080
 ENV JAVA_OPTS="${JAVA_OPTS}"
-ENTRYPOINT ["sh","-c","exec java $JAVA_OPTS -jar /app/app.jar"]
+# ENTRYPOINT ["sh","-c","exec java $JAVA_OPTS -jar /app/app.jar"]
+
+#  -Dserver.port=$PORT
+ENTRYPOINT ["sh","-c","exec java -XX:MaxRAMPercentage=75 $JAVA_OPTS -Dserver.port=$PORT -jar /app/app.jar"]

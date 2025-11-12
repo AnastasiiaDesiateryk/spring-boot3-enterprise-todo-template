@@ -35,7 +35,7 @@ mvc:
   cors:
     mappings:
       "[/**]":
-        allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173,https://my-frontend.onrender.com}
+        allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173,https://my-frontend.onrender.com,https://todolist-anastasiia-desiateryk.netlify.app}
         allowed-methods: ${CORS_ALLOWED_METHODS:*}
         allowed-headers: ${CORS_ALLOWED_HEADERS:*}
         allow-credentials: ${CORS_ALLOW_CREDENTIALS:true}
