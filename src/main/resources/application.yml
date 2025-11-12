@@ -7,6 +7,8 @@ spring:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/todo}
     username: ${DB_USER:postgres}
     password: ${DB_PASSWORD:postgres}
+    hikari:
+      maximum-pool-size: 5
 
   jpa:
     open-in-view: false
@@ -23,13 +25,22 @@ management:
   endpoints:
     web:
       exposure:
-#        include: health,info,metrics
-        include: "*"
+        include: health,info,metrics
+#        include: "*"
   endpoint:
     health:
-      show-details: always
-  security:
-    enabled: false
+      probes:
+        enabled: true
+      show-details: never
+      group:
+        readiness:
+          enabled: true
+          include: "*"
+          additional-path: /readyz
+        liveness:
+          enabled: true
+          include: "*"
+          additional-path: /livez
 
 jwt:
   issuer: ${JWT_ISSUER:todo-app}
@@ -37,18 +48,17 @@ jwt:
 
 
 
-mvc:
-  cors:
-    mappings:
-      "[/**]":
-        allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173,https://my-frontend.onrender.com,https://todolist-anastasiia-desiateryk.netlify.app}
-        allowed-methods: ${CORS_ALLOWED_METHODS:*}
-        allowed-headers: ${CORS_ALLOWED_HEADERS:*}
-        allow-credentials: ${CORS_ALLOW_CREDENTIALS:true}
-        exposed-headers: ${CORS_EXPOSED_HEADERS:ETag}
+#mvc:
+#  cors:
+#    mappings:
+#      "[/**]":
+#        allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173,https://todolist-anastasiia-desiateryk.netlify.app}
+#        allowed-methods: ${CORS_ALLOWED_METHODS:*}
+#        allowed-headers: ${CORS_ALLOWED_HEADERS:*}
+#        allow-credentials: ${CORS_ALLOW_CREDENTIALS:true}
+#        exposed-headers: ${CORS_EXPOSED_HEADERS:ETag}
 
 firebase:
-
   credentials-file: ${FIREBASE_CREDENTIALS_FILE:file:./secrets/todoapp-anastasia-firebase-adminsdk-fbsvc-899592f665.json}
   project-id: ${FIREBASE_PROJECT_ID:todoapp-anastasia}
 
