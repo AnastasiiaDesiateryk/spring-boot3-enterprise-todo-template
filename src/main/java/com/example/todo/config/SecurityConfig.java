@@ -31,47 +31,47 @@ public class SecurityConfig {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource(
-            @Value("${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173}") String origins) {
-
-        var allowed = Arrays.stream(origins.split(","))
-                .map(String::trim).filter(s -> !s.isEmpty()).toList();
-
-        var cfg = new CorsConfiguration();
-        cfg.setAllowedOrigins(allowed); // или setAllowedOriginPatterns(...)
-        cfg.setAllowedMethods(List.of("GET","POST","PUT","PATCH","DELETE","OPTIONS"));
-        cfg.setAllowedHeaders(List.of("*"));
-        cfg.setExposedHeaders(List.of("ETag"));
-        cfg.setAllowCredentials(true);
-        cfg.setMaxAge(3600L); // cash preflight for 1 hour
-
-        var src = new UrlBasedCorsConfigurationSource();
-        src.registerCorsConfiguration("/**", cfg);
-        return src;
-    }
-
 //    @Bean
 //    CorsConfigurationSource corsConfigurationSource(
-//            @Value("${cors.allowed-origins:http://localhost:3000,http://localhost:5173}") String origins) {
-//        List<String> allowed = Arrays.stream(origins.split(","))
-//                .map(String::trim)
-//                .filter(s -> !s.isEmpty())
-//                .collect(Collectors.toList());
-//        CorsConfiguration config = new CorsConfiguration();
-//        config.setAllowedOrigins(List.of(
-//                "http://localhost:3000",
-//                "http://localhost:5173",
-//                "https://todolist-anastasiia-desiateryk.netlify.app"
-//        ));
-//        config.addAllowedMethod("*");
-//        config.addAllowedHeader("*");
-//        config.setExposedHeaders(List.of("ETag"));
-//        config.setAllowCredentials(true);
-//        UrlBasedCorsConfigurationSource src = new UrlBasedCorsConfigurationSource();
-//        src.registerCorsConfiguration("/**", config);
+//            @Value("${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173}") String origins) {
+//
+//        var allowed = Arrays.stream(origins.split(","))
+//                .map(String::trim).filter(s -> !s.isEmpty()).toList();
+//
+//        var cfg = new CorsConfiguration();
+//        cfg.setAllowedOrigins(allowed); // или setAllowedOriginPatterns(...)
+//        cfg.setAllowedMethods(List.of("GET","POST","PUT","PATCH","DELETE","OPTIONS"));
+//        cfg.setAllowedHeaders(List.of("*"));
+//        cfg.setExposedHeaders(List.of("ETag"));
+//        cfg.setAllowCredentials(true);
+//        cfg.setMaxAge(3600L); // cash preflight for 1 hour
+//
+//        var src = new UrlBasedCorsConfigurationSource();
+//        src.registerCorsConfiguration("/**", cfg);
 //        return src;
 //    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource(
+            @Value("${cors.allowed-origins:http://localhost:3000,http://localhost:5173}") String origins) {
+        List<String> allowed = Arrays.stream(origins.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toList());
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of(
+                "http://localhost:3000",
+                "http://localhost:5173",
+                "https://todolist-anastasiia-desiateryk.netlify.app"
+        ));
+        config.addAllowedMethod("*");
+        config.addAllowedHeader("*");
+        config.setExposedHeaders(List.of("ETag"));
+        config.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource src = new UrlBasedCorsConfigurationSource();
+        src.registerCorsConfiguration("/**", config);
+        return src;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -79,9 +79,8 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers(HttpMethod.POST, "/auth/google", "/auth/logout").permitAll()
-                    .requestMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**","/actuator/health", "/readyz", "/livez").permitAll()
-//                                 "/actuator/health", "/actuator/health/**",
-//                                 "/actuator/health/readiness", "/actuator/health/liveness"
+                    .requestMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/actuator/health", "/actuator/health", "/actuator/health/**", "/actuator/health/readiness", "/actuator/health/liveness", "/readyz", "/livez").permitAll()
+
                     .anyRequest().authenticated()
             )
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

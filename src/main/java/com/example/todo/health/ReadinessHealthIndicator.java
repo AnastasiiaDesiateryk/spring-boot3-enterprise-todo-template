@@ -5,8 +5,8 @@ import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-//@Component("readiness")
-@Component("appReadiness")
+@Component("readiness")
+//@Component("appReadiness")
 public class ReadinessHealthIndicator implements HealthIndicator {
 
     private final JdbcTemplate jdbc;
