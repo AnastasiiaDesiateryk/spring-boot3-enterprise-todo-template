@@ -1,12 +1,12 @@
 # Todo App
 
 Production-ready Spring Boot backend for a TODO application with:
-- PostgreSQL + Flyway migrations (tags as text[], metadata as jsonb)
+- PostgreSQL + Flyway migrations 
 - JWT authentication (Nimbus via spring-security-oauth2-jose)
 - Google ID token verification (JWKs)
 - ETag / If-Match optimistic locking using JPA @Version
 - MapStruct for DTO mapping
-- Hibernate Types for arrays and JSON
+- Hibernate 6
 - OpenAPI (springdoc)
 - Dockerfile for build + runtime
 
@@ -19,7 +19,7 @@ Features
 - Actuator health endpoints
 
 Prerequisites
-- Java 21 (Temurin/OpenJDK)
+- Java 21 
 - Maven 3.8+
 - PostgreSQL (for local run) or Testcontainers for tests
 - Docker (to build container)
@@ -52,7 +52,7 @@ Configuration
 Important Implementation Notes
 - pom.xml uses spring-boot-starter-parent 3.3.x to manage versions.
 - MapStruct version is set to 1.6.x; maven-compiler-plugin configured to run annotation processor.
-- Hibernate types (hibernate-types-60) used with fully-qualified @Type FQCN to map text[] and jsonb.
+- Hibernate 6.
 - Flyway V1 migration creates enums, tables, GIN indexes and updated_at trigger.
 - SecurityConfig registers JwtAuthenticationFilter before UsernamePasswordAuthenticationFilter and exposes actuator health endpoints.
 - ETagUtil formats and parses weak ETags like W/"<version>".
