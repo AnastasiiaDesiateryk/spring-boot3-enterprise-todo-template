@@ -1,4 +1,8 @@
-# Todo App
+# Spring Boot 3 Enterprise To-Do Template
+
+Production-grade backend template with modern Spring Boot 3.3, PostgreSQL, Flyway, Firebase (Google), JWT, multi-tenant ACL, MapStruct, structured testing, and full CI/CD setup.
+Designed as a reusable foundation for real-world SaaS-style applications — not a demo.
+
 
 Production-ready Spring Boot backend for a TODO application with:
 - PostgreSQL + Flyway migrations 
