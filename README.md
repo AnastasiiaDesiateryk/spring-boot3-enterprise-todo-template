@@ -3,12 +3,12 @@
 Production-grade backend template with modern Spring Boot 3.3, PostgreSQL, Flyway, Firebase (Google), JWT, multi-tenant ACL, MapStruct, structured testing, and full CI/CD setup.
 Designed as a reusable foundation for real-world SaaS-style applications — not a demo.
 
-If you’d like to learn more about the tests, proceed to the **Quality Assurance** or **Architecture** page using the button below.
+If you’d like to learn more about the tests, proceed to the **Quality Assurance**, **Architecture** and **API Overview** page using the button below.
 
 [![Open QA Page](https://img.shields.io/badge/Quality%20Assurance-Open-blue?style=for-the-badge)](Quality_Assurance.md)
 [![Open QA Page](https://img.shields.io/badge/Architecture-Open-red?style=for-the-badge)](Architecture.md)
+[![Open QA Page](https://img.shields.io/badge/API-Open-green?style=for-the-badge)](API_Overview.md)
 
-Architecture.md
 ---
 
 Production-ready Spring Boot backend for a TODO application with:
